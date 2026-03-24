@@ -18,14 +18,10 @@ const App = () => {
 //length of array
  const nummberAnecdotes = anecdotes.length
 
-
-
   // stateful 
   const [selected, setSelected] = useState(0)
 
-  //will be deleted
-  const [vote, setVote] = useState(0)
-
+  //Saves the vote state
   const [allClicks, setClick] = useState(new Array(nummberAnecdotes).fill(0))
 
    
@@ -46,17 +42,44 @@ const App = () => {
       
     }
 
+
+
     const handleVoteClick = () => {
 
-      setVote (vote + 1)
+      //const votes = allClicks
 
-        const votes = allClicks
+      const copy = [...allClicks]
 
-        const copy = { ...votes }
-        // increment the property 2 value by one
-        copy[2] += 1 
-      setClick(votes)
-      console.log(votes)
+      copy[selected] +=1
+
+
+      setClick(copy)
+
+
+      console.log(copy)
+      
+    }
+
+    const findLargest = (arr) => {
+
+      //Search the largest index and display the anecdote
+
+      let maxIndex = 0
+
+      for (let i=1; i<arr.length; i ++)
+
+        {
+          if(arr[i] > arr[maxIndex])
+          maxIndex = i
+        }
+      
+        return (
+          <div>
+            <h3>Anecdote with the most votes</h3>
+            <p>{anecdotes[maxIndex]}</p>
+            <p>has {arr[maxIndex]} votes</p>
+          </div>
+        )
     }
 
            
@@ -64,11 +87,13 @@ const App = () => {
       
   return (
     <div>
-      {selected} {anecdotes[selected]} <br />
-      <p>has {vote} votes</p> 
+      <h3>Anecdote of the day</h3>
+    {anecdotes[selected]} <br />
+      
+      <p>has {allClicks[selected]} votes</p><br />
       <button onClick={handleVoteClick}>vote</button>
       <button onClick={handleSelectedClick}>next anecdote</button>
-   
+      {findLargest(allClicks)}
     </div>
   )
 }
