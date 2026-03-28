@@ -1,3 +1,4 @@
+import Exercise from './Exercise.jsx'
 import Part from './Part.jsx'
 
 const Content = ({parts}) => 
@@ -6,6 +7,12 @@ const Content = ({parts}) =>
 
             {
                <Part parts={parts}/>
+
+           
+            }
+
+            {
+                <Exercise parts={parts}/>
             }
 
         </ul> )

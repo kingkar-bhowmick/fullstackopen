@@ -1,4 +1,4 @@
-const Header = ({course}) => <h1 key={course.id}>{course.name}</h1>
+const Header = ({name}) =>  <h2>{name}</h2>
 
 
 export default Header
