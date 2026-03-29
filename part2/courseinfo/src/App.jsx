@@ -1,5 +1,5 @@
 import Course from './component/Course'
-
+import './App.css' 
 
 
 const App = () => {
