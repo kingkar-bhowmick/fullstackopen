@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Overall page */
+body {
+  font-family: 'Inter', sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 24px;
+  background-color: #0d0d0d;
+  color: #e8e8e8;
+  min-height: 100vh;
+}
+
+/* Headings */
+h2 {
+  color: #a0a0a0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #222;
+  padding-bottom: 10px;
+  margin: 28px 0 14px;
+}
+
+/* Search and form inputs */
+input {
+  padding: 10px 14px;
+  margin: 4px 0;
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #e8e8e8;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+input::placeholder {
+  color: #444;
+}
+
+/* Add button */
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Each person entry */
+p {
+  background: #161616;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 6px 0;
+  border: 1px solid #222;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #c8c8c8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+p:hover {
+  border-color: #3b82f6;
+  transform: translateX(4px);
+  color: #e8e8e8;
+}
+
+/* Filter row */
+div > input {
+  margin-left: 8px;
+}

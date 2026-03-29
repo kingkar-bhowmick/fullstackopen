@@ -1,91 +1,113 @@
 import { useState } from 'react'
 
+import './App.css' 
 
 
 const App = () => {
 
-  
+  // ---- STATE ----
+  // The main list of all persons - never mutate this directly!
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
     { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ]) 
-  const [newName, setNewName] = useState('')
+  ])
 
-    const [newNumber, setNewNumber] = useState('')
+  const [newName, setNewName] = useState('')       // tracks name input keystroke by keystroke
+  const [newNumber, setNewNumber] = useState('')   // tracks number input keystroke by keystroke
+  const [searchName, setSearchName] = useState('') // tracks search input keystroke by keystroke
 
-     const [showAll, setShowAll] = useState(true)
+
+  // ---- DERIVED DATA ----
+  // Recalculates every render - shows everyone if search is empty,
+  // otherwise filters to names that include the search text
+  // You kept confusing this: filter returns an ARRAY, then we map over it in JSX
+  const personsToShow = searchName === ''
+    ? persons
+    : persons.filter(person => person.name.includes(searchName))
 
 
-  const handleNoteChange = (event) => {
-    // track changes to the state, key stroke
-   console.log(event.target.value)
-    setNewName(event.target.value)
+  // ---- HELPERS ----
+  // Returns the found person object (truthy) or undefined (falsy)
+  // You confused this a few times - find() needs a callback function, not a value!
+  const alreadyExists = (name) => persons.find(person => person.name === name)
+
+
+  // ---- EVENT HANDLERS ----
+  // Each input has its OWN handler that updates its OWN state
+  // You confused this early on by using one handler for everything
+  const handleNameChange = (event) => {
+    setNewName(event.target.value) // event.target.value = full current input value
   }
 
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
 
+  const handleSearchChange = (event) => {
+    // You tried searchName.concat() and searchName(value) here before
+    // but event.target.value already has the full typed string - just save it directly!
+    setSearchName(event.target.value)
+  }
 
-  // adds a peron object to the array
-  const addPerson = (event)  => {
+  // ---- FORM SUBMISSION ----
+  // One function handles everything when "add" is clicked
+  // event.preventDefault() always goes first - stops page refresh
+  const addPerson = (event) => {
+    event.preventDefault()
 
-    
-    console.log(alreadyExists(newName))
-
-    if(alreadyExists(newName))
-    {
-        event.preventDefault()
+    if (alreadyExists(newName)) {
+      // Name already in list - warn user, do nothing else
       window.alert(`${newName} is already added to phonebook`)
+    } else {
+      // Build new person object from current input state
+      const personObject = {
+        name: newName,
+        number: newNumber,
+        id: persons.length + 1 // simple id
+      }
+
+      // concat creates a NEW array (no mutation!) - React sees the change and re-renders
+      setPersons(persons.concat(personObject))
+
+      // Clear both input fields after adding
+      setNewName('')
+      setNewNumber('')
     }
-
-    else {
-  event.preventDefault()
-      //creates the new object by taking the inputs from the form
-    const nameObejct = {
-      name:newName,
-      number:newNumber
-    }
-
-    // copying and adding without mutating
-    setPersons(persons.concat(nameObejct))
-
-    // clears the input fields
-    setNewName('')
-    setNewNumber('')
-    }
-  
-  }
-
-    // track changes to the state, key stroke
-    const handleNumberChange = (event) => {
-
-      console.log(event.target.value)
-        setNewNumber(event.target.value)
   }
 
 
-  //returns if exists the name itself or undefined
-  const alreadyExists = (newname) => persons.find(person => person.name === newname) // retunrs Truthy or Falsy
-
- // const personsToShow = showAll ? persons : persons.filter(person => person.name === true)
-
+  // ---- RENDER ----
   return (
     <div>
-      <h2>Phonebook</h2>  
-      <form>
-        <div>
-          name: <input  value={newName} onChange={handleNoteChange}/>
-        </div>
-         <div>number: <input value={newNumber} onChange={handleNumberChange}/></div>
+      <h2>Phonebook</h2>
 
-        <div>
-          <button type="submit" onClick = {addPerson}>add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
+      {/* Search box - filters the displayed list as you type */}
       <div>
-        {persons.map(person => <p>{person.name} {person.number}</p>)} 
+        filter shown with <input value={searchName} onChange={handleSearchChange} />
       </div>
+
+      {/* Form to add new persons */}
+      <form onSubmit={addPerson}>
+        <div>name: <input value={newName} onChange={handleNameChange} /></div>
+        <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
+        <div><button type="submit">add</button></div>
+      </form>
+
+      <h2>Numbers</h2>
+
+      {/* 
+        Map over personsToShow (not persons!) so search filtering works.
+        You confused this many times - filter gives you the array,
+        then map turns each person into JSX. Always need key prop!
+      */}
+      <div>
+        {personsToShow.map(person =>
+          <p key={person.id}>{person.name} {person.number}</p>
+        )}
+      </div>
+
     </div>
   )
 }
