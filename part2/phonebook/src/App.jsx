@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import Person from './component/Person.jsx'
+import Filter from './component/Filter.jsx'
+import PersonForm from './component/PersonForm.jsx'
 
 import './App.css' 
 
@@ -38,10 +41,12 @@ const App = () => {
   // Each input has its OWN handler that updates its OWN state
   // You confused this early on by using one handler for everything
   const handleNameChange = (event) => {
+    console.log(event.target.value)
     setNewName(event.target.value) // event.target.value = full current input value
   }
 
   const handleNumberChange = (event) => {
+      console.log(event.target.value)
     setNewNumber(event.target.value)
   }
 
@@ -84,16 +89,14 @@ const App = () => {
       <h2>Phonebook</h2>
 
       {/* Search box - filters the displayed list as you type */}
-      <div>
-        filter shown with <input value={searchName} onChange={handleSearchChange} />
-      </div>
+    
+      <div><Filter searchName={searchName} handleSearchChange={handleSearchChange}/></div>
+      
 
       {/* Form to add new persons */}
-      <form onSubmit={addPerson}>
-        <div>name: <input value={newName} onChange={handleNameChange} /></div>
-        <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
-        <div><button type="submit">add</button></div>
-      </form>
+
+      <PersonForm addPerson = {addPerson}  newName={newName} handleNameChange={handleNameChange}
+      newNumber={newNumber} handleNumberChange={handleNumberChange}/>
 
       <h2>Numbers</h2>
 
@@ -102,10 +105,8 @@ const App = () => {
         You confused this many times - filter gives you the array,
         then map turns each person into JSX. Always need key prop!
       */}
-      <div>
-        {personsToShow.map(person =>
-          <p key={person.id}>{person.name} {person.number}</p>
-        )}
+      <div> 
+        <Person persons = {personsToShow}/>
       </div>
 
     </div>

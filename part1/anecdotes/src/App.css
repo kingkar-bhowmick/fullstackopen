@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Overall page */
+body {
+  font-family: 'Inter', sans-serif;
+  max-width: 660px;
+  margin: 40px auto;
+  padding: 0 24px;
+  background-color: #0d0d0d;
+  color: #e8e8e8;
+  min-height: 100vh;
+}
+
+/* Section headings */
+h3 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  margin: 0 0 14px;
+}
+
+/* The anecdote quote text — targets the text node wrapper div */
+div > div {
+  background: #161616;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+/* Main anecdote card */
+div {
+  margin-bottom: 6px;
+}
+
+/* Quote and vote count paragraphs */
+p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #888;
+  margin: 8px 0 0;
+}
+
+p b, strong {
+  color: #3b82f6;
+}
+
+/* Anecdote text itself (the raw text node sits next to br) */
+div > br {
+  display: none; /* hide the <br> tags — spacing handled by CSS */
+}
+
+/* Buttons */
+button {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+/* Vote button — accent */
+button:first-of-type {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+button:first-of-type:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+
+/* Next anecdote button — ghost */
+button:last-of-type {
+  background-color: transparent;
+  color: #a0a0a0;
+  border-color: #2a2a2a;
+}
+
+button:last-of-type:hover {
+  border-color: #555;
+  color: #e8e8e8;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Most votes section */
+div > h3 {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #1e1e1e;
+}
