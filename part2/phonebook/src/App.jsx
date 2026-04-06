@@ -4,8 +4,9 @@ import Filter from './component/Filter.jsx'
 import PersonForm from './component/PersonForm.jsx'
 import axios from 'axios'
 
-
 import './App.css' 
+
+import personService from './services/person'
 
 
 const App = () => {
@@ -71,14 +72,20 @@ const App = () => {
       }
 
       // concat creates a NEW array (no mutation!) - React sees the change and re-renders
-      setPersons(persons.concat(personObject))
+      //setPersons(persons.concat(personObject))
+
 
       // Clear both input fields after adding
-      setNewName('')
-      setNewNumber('')
-    }
-  }
+      //setNewName('')
+      //setNewNumber('')
+    personService.create(personObject).then(
+      response => {
+      setPersons(persons.concat(response.data))
+      setNewName('') 
+    })
+  } 
 
+  }
   //-- Fetching from the Server Data 
 
   console.log('Test')
@@ -124,5 +131,6 @@ const App = () => {
     </div>
   )
 }
+
 
 export default App
