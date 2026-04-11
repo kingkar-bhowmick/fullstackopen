@@ -9,6 +9,7 @@ import './App.css'
 import personService from './services/person'
 
 
+
 const App = () => {
 
   // ---- STATE ----
@@ -29,6 +30,7 @@ const App = () => {
     : persons.filter(person => person.name.includes(searchName))
 
 
+    
   // ---- HELPERS ----
   // Returns the found person object (truthy) or undefined (falsy)
   // You confused this a few times - find() needs a callback function, not a value!
@@ -54,6 +56,18 @@ const App = () => {
     setSearchName(event.target.value)
   }
 
+
+  const deleteOnClick = (id) => {
+  
+  if(window.confirm('Are you sure you want to delete this Person'))
+  {
+     personService.remove(id).then( () => {
+      setPersons(persons.filter(person => person.id !== id))
+     })
+  }
+
+}
+
   // ---- FORM SUBMISSION ----
   // One function handles everything when "add" is clicked
   // event.preventDefault() always goes first - stops page refresh
@@ -62,7 +76,21 @@ const App = () => {
 
     if (alreadyExists(newName)) {
       // Name already in list - warn user, do nothing else
-      window.alert(`${newName} is already added to phonebook`)
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with the new one ?`))
+      {
+        const personObject = persons.find(person => person.name == newName)
+
+        const updatedPersonOject = {...personObject, number:newNumber}
+       
+
+        personService.update(updatedPersonOject.id, updatedPersonOject).then( response => {
+          setPersons(persons.map(p => p.id !== updatedPersonOject.id? p:response.data))
+          setNewName('')
+          setNewNumber('')
+        })
+      }
+
+
     } else {
       // Build new person object from current input state
       const personObject = {
@@ -84,6 +112,7 @@ const App = () => {
       setNewName('') 
     })
   } 
+
 
   }
   //-- Fetching from the Server Data 
@@ -125,7 +154,7 @@ const App = () => {
         then map turns each person into JSX. Always need key prop!
       */}
       <div> 
-        <Person persons = {personsToShow}/>
+        <Person persons = {personsToShow} deleteOnClick={deleteOnClick}/>
       </div>
 
     </div>
