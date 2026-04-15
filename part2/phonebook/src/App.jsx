@@ -8,6 +8,7 @@ import './App.css'
 
 import personService from './services/person'
 
+import Notification from './components/Notification.jsx';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')   // tracks number input keystroke by keystroke
   const [searchName, setSearchName] = useState('') // tracks search input keystroke by keystroke
 
+  const [message, setMessage] = useState(null)
 
   // ---- DERIVED DATA ----
   // Recalculates every render - shows everyone if search is empty,
@@ -87,6 +89,10 @@ const App = () => {
           setPersons(persons.map(p => p.id !== updatedPersonOject.id? p:response.data))
           setNewName('')
           setNewNumber('')
+
+          // 
+
+        
         })
       }
 
@@ -109,7 +115,17 @@ const App = () => {
     personService.create(personObject).then(
       response => {
       setPersons(persons.concat(response.data))
-      setNewName('') 
+      
+
+        setMessage(
+          `Added '${newName}' to the Phonebook`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+
+        setNewName('') 
+        setNewNumber('')
     })
   } 
 
@@ -135,6 +151,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Notification message={message} />
 
       {/* Search box - filters the displayed list as you type */}
     

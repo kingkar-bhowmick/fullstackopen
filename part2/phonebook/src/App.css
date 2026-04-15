@@ -98,3 +98,13 @@ p:hover {
 div > input {
   margin-left: 8px;
 }
+
+.error {
+  color: rgb(10, 136, 50);
+  background: rgb(239, 236, 236);
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
