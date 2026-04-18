@@ -103,6 +103,13 @@ const App = () => {
           setNewName('')
           setNewNumber('')
 
+        setMessage(
+          `Information for '${newName}' changed`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+
           // 
 
         

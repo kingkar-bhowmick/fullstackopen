@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Kingkar",
-      "number": "12345678",
-      "id": "CigGETVmHMA"
-    } , 
-    {
       "name": "Matti Luukkainen",
       "number": "040-123456",
       "id": "CigGETVmHMB"
@@ -29,6 +24,11 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": "CigGETVmHMF"
+    },
+    {
+      "name": "Siyi Chen",
+      "number": "1234",
+      "id": "sqeGdLHNDCg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
