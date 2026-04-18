@@ -3,8 +3,16 @@ const Notification = ({ message }) => {
     return null
   }
 
+  if (message.includes('removed')) {
+    return (
+      <div className="error">
+        {message}
+      </div>
+    )
+  }
+
   return (
-    <div className="error">
+    <div className="message">
       {message}
     </div>
   )

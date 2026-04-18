@@ -23,6 +23,8 @@ const App = () => {
 
   const [message, setMessage] = useState(null)
 
+  const [errorMessage, setErrorMessage] = useState(null)
+
   // ---- DERIVED DATA ----
   // Recalculates every render - shows everyone if search is empty,
   // otherwise filters to names that include the search text
@@ -64,7 +66,18 @@ const App = () => {
   if(window.confirm('Are you sure you want to delete this Person'))
   {
      personService.remove(id).then( () => {
+
+      const deletedName = persons.find(p => p.id === id).name
+      
       setPersons(persons.filter(person => person.id !== id))
+
+      setErrorMessage(
+        `Information of '${deletedName}' has been removed from server`
+      )
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+
      })
   }
 
@@ -86,14 +99,26 @@ const App = () => {
        
 
         personService.update(updatedPersonOject.id, updatedPersonOject).then( response => {
-          setPersons(persons.map(p => p.id !== updatedPersonOject.id? p:response.data))
+          setPersons(persons.map(p => p.id !== updatedPersonOject.id? p:response.data)) 
           setNewName('')
           setNewNumber('')
 
           // 
 
         
-        })
+        }).catch(error => {
+          setErrorMessage(
+          `Information of '${newName}' has already been removed from server`
+        )
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)}
+
+            ,setNewName(''), 
+        setNewNumber('')
+        ,setPersons(persons.filter(p => p.id !== updatedPersonOject.id) )
+             
+      )
       }
 
 
@@ -153,6 +178,7 @@ const App = () => {
       <h2>Phonebook</h2>
 
       <Notification message={message} />
+      <Notification message={errorMessage} />
 
       {/* Search box - filters the displayed list as you type */}
     

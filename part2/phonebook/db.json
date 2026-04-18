@@ -1,24 +1,34 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
+      "name": "Kingkar",
+      "number": "12345678",
+      "id": "CigGETVmHMA"
+    } , 
+    {
+      "name": "Matti Luukkainen",
       "number": "040-123456",
-      "id": "1"
+      "id": "CigGETVmHMB"
+    },
+    {
+      "name": "Arto Hellas",
+      "number": "040-654321",
+      "id": "CigGETVmHMC"
     },
     {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
-      "id": "2"
+      "id": "CigGETVmHMD"
     },
     {
       "name": "Dan Abramov",
       "number": "12-43-234345",
-      "id": "3"
+      "id": "CigGETVmHME"
     },
     {
-      "name": "Kingkar",
-      "number": "",
-      "id": "WrkVo_YfkFs"
+      "name": "Mary Poppendieck",
+      "number": "39-23-6423122",
+      "id": "CigGETVmHMF"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
