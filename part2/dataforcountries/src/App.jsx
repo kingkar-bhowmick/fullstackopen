@@ -3,17 +3,17 @@ import { useState } from 'react'
 
 import countryService from './services/country'
 
+import Item from './components/Item'
+
 
 const App = () => {
 
-  // States
+  // useStates
   const [countries, setCountries] = useState(null)
   const [countryName, setCountryName] = useState('')
 
-   const [searchName, setSearchName] = useState('')
+  const [selectedCountry, setSelectedCountry] = useState(null)
   
-
-
  
   // Debug
  const displayHello = () => {
@@ -31,7 +31,7 @@ const App = () => {
      )}
 
 
-     //-- Hooks // UseState UseEffect
+     //-- Hooks // UseEffect
 
      useEffect(() => {
 
@@ -73,6 +73,16 @@ const App = () => {
   }
 
 
+  const handleOnSelect = (country) => {
+
+    setSelectedCountry(selectedCountry?.cca3 === country.cca3 ? null: country)
+
+
+  }
+
+
+
+
      //-- Display / Render Helpers
 
      const displayResults = () => {
@@ -99,7 +109,11 @@ const App = () => {
       
         return (
           <ul>
-            {countriesToShow.map(country => (<li key={country.cca3}>{country.name.common}</li>))}
+            {countriesToShow.map(country =>
+               (<li key={country.cca3}>{country.name.common}
+                <button  onClick={() => handleOnSelect(country)}>show</button>
+                {selectedCountry && selectedCountry.cca3 === country.cca3 && <Item country={selectedCountry}/>}
+                </li>))}
           </ul>
         )
       }
@@ -110,18 +124,7 @@ const App = () => {
       const country = countriesToShow[0] 
 
       return (
-        <div>
-          <h2>{country.name.common}</h2>
-          <p>{country.capital}</p>
-          <p>{country.area}</p>
-          <ul>
-            {Object.values(country.languages).map(language => (
-              <li key={language}>{language}</li>
-            ))}
-          </ul>
-          <img src={country.flags.png} alt={country.name.common} />
-        
-        </div>
+        <Item country={country}/>
       )
 
       }
