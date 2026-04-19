@@ -24,11 +24,6 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": "CigGETVmHMF"
-    },
-    {
-      "name": "Siyi Chen",
-      "number": "1234",
-      "id": "sqeGdLHNDCg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import Person from './component/Person.jsx'
-import Filter from './component/Filter.jsx'
-import PersonForm from './component/PersonForm.jsx'
+import Person from './components/Person.jsx'
+import Filter from './components/Filter.jsx'
+import PersonForm from './components/PersonForm.jsx'
 import axios from 'axios'
 
 import './App.css' 
@@ -68,7 +68,7 @@ const App = () => {
      personService.remove(id).then( () => {
 
       const deletedName = persons.find(p => p.id === id).name
-      
+
       setPersons(persons.filter(person => person.id !== id))
 
       setErrorMessage(
