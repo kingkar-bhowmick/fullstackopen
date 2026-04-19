@@ -1,6 +1,6 @@
 import WeatherDisplay from "./WeatherDisplay"
 
-const Item = ({ country }) => {  // hint: remove weather and weatherSelected props — not needed
+const Item = ({ country }) => { 
   return (
   <div className="country-detail">
       <h1>{country.name.common}</h1>
@@ -13,7 +13,7 @@ const Item = ({ country }) => {  // hint: remove weather and weatherSelected pro
       </ul>
       <img src={country.flags.png} alt={country.name.common} />
 
-      <WeatherDisplay capital={country.capital} />  {/* hint: just pass capital */}
+      <WeatherDisplay capital={country.capital} /> 
     </div>
   )
 }

@@ -106,7 +106,7 @@ const App = () => {
         return (<p> Too many matches, specify another field</p>)
       }
 
-      // hint: more than 1 but less than or equal to 10
+      //  more than 1 but less than or equal to 10
       if(countriesToShow.length > 1) 
       {
       
@@ -146,7 +146,7 @@ const App = () => {
     <div>
     {displayHello()}
     <form  onSubmit={handleOnSubmit}>
-      <span>find countries</span> <input value={countryName} onChange={handleChange}/>
+      <span>find countries</span> <input value={countryName} onChange={handleChange} placeholder="Type here..." />
        </form>
 
     {displayResults()}
