@@ -5,6 +5,8 @@ import countryService from './services/country'
 
 import Item from './components/Item'
 
+import './App.css'
+
 
 const App = () => {
 
@@ -13,7 +15,7 @@ const App = () => {
   const [countryName, setCountryName] = useState('')
 
   const [selectedCountry, setSelectedCountry] = useState(null)
-  
+
  
   // Debug
  const displayHello = () => {
@@ -44,6 +46,7 @@ const App = () => {
               
 
      }, [])
+
 
   
 // Option B
@@ -113,6 +116,7 @@ const App = () => {
                (<li key={country.cca3}>{country.name.common}
                 <button  onClick={() => handleOnSelect(country)}>show</button>
                 {selectedCountry && selectedCountry.cca3 === country.cca3 && <Item country={selectedCountry}/>}
+             
                 </li>))}
           </ul>
         )
@@ -124,9 +128,11 @@ const App = () => {
       const country = countriesToShow[0] 
 
       return (
+        <div> 
         <Item country={country}/>
-      )
-
+        </div>
+       
+            )
       }
 
       }
@@ -140,7 +146,7 @@ const App = () => {
     <div>
     {displayHello()}
     <form  onSubmit={handleOnSubmit}>
-      find countries <input value={countryName} onChange={handleChange}/>
+      <span>find countries</span> <input value={countryName} onChange={handleChange}/>
        </form>
 
     {displayResults()}

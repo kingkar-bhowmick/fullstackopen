@@ -1,0 +1,198 @@
+/* App.css */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --border: rgba(0,0,0,0.1);
+  --text-primary: #1a1a18;
+  --text-secondary: #6b6b66;
+  --accent: #1d9e75;
+  --accent-light: #e1f5ee;
+  --radius: 12px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+/* Search bar */
+form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+form label,
+form span {
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+form input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+form input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Country list */
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+li {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+/* Show button */
+button {
+  margin-left: auto;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+button:hover {
+  background: #9fe1cb;
+}
+
+/* Country detail card */
+.country-detail {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.country-detail h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.country-detail h2 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.country-detail p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.country-detail p span {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.country-detail ul {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.country-detail li {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.country-detail img {
+  width: 100%;
+  max-width: 240px;
+  border-radius: 8px;
+  border: 0.5px solid var(--border);
+  margin-top: 1rem;
+}
+
+/* Weather section */
+.weather {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--border);
+}
+
+.weather p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.weather p span {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.weather img {
+  width: 64px;
+  height: 64px;
+  border: none;
+  border-radius: 0;
+  margin-top: 0;
+}
+
+/* Too many results message */
+p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding: 1rem 0;
+}
