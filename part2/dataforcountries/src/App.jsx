@@ -114,7 +114,7 @@ const App = () => {
           <ul>
             {countriesToShow.map(country =>
                (<li key={country.cca3}>{country.name.common}
-                <button  onClick={() => handleOnSelect(country)}>show</button>
+                <button  onClick={() => handleOnSelect(country)}>{selectedCountry?.cca3 === country.cca3 ? 'hide' : 'show'}</button>
                 {selectedCountry && selectedCountry.cca3 === country.cca3 && <Item country={selectedCountry}/>}
              
                 </li>))}

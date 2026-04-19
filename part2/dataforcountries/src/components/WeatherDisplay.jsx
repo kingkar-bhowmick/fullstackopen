@@ -20,10 +20,14 @@ const WeatherDisplay = ({ capital }) => {
 
   return (
  <div className="weather">
+    <h1>Weather in {capital}</h1>
       <p>Temperature: {weather.main.temp} °C</p>
+
+      <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description}/>
+      
       <p>Wind: {weather.wind.speed} m/s</p>
       {/* hint: weather.weather[0].icon gives you the icon code */}
-      <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description}/>
+      
     </div>
   )
 }
