@@ -3,6 +3,8 @@ const { request } = require('node:http')
 
 const app = express()
 
+app.use(express.json())
+
 const persons = [
     { 
       "id": "1",
@@ -79,6 +81,42 @@ app.get('/api/persons/:id',(request, response) => {
     response.status(204).end()
 
   })
+
+
+  app.post('/api/persons', (request, response) => {
+  const body = request.body
+
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: 'name or number missing'
+    })
+  }
+
+  const existingPerson = persons.find(person => person.name == body.name)
+
+  if(body.name == existingPerson)
+  {
+     return response.status(400).json({
+      error: 'name must be unique'
+    })
+  }
+
+  const maxID = persons.length > 0
+    ? Math.max(...persons.map(n => Number(n.id)))
+    : 0
+
+  const newPerson = {
+    id: String(maxID + 1),
+    name: body.name,
+    number: body.number
+  }
+
+  persons.push(newPerson)
+
+  console.log(newPerson)
+
+  response.json(newPerson)
+})
 
 
 const PORT = 3001
