@@ -1,9 +1,23 @@
 const express = require('express')
 const { request } = require('node:http')
+const morgan = require('morgan')
 
 const app = express()
 
+//// Middleware
 app.use(express.json())
+//app.use(morgan('tiny'))
+
+
+// Create custom token // Token is function to display in console log for Middleware
+morgan.token('body', (req) => {
+  return JSON.stringify(req.body)
+})
+
+// Use token
+// Middleware
+// method print, post, status, prints status code, response, and response time ms, and body 
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 const persons = [
     { 
@@ -29,7 +43,7 @@ const persons = [
 
 ]
 
-
+// routes
 app.get('/', (request, response ) => {
     response.send('<h1><a href="http://localhost:3001/api/persons">Person list</a><h1>')
 })
