@@ -1,12 +1,16 @@
 const express = require('express')
 const { request } = require('node:http')
 const morgan = require('morgan')
+const cors = require('cors')
+
 
 const app = express()
 
 //// Middleware
 app.use(express.json())
 //app.use(morgan('tiny'))
+
+app.use(cors())
 
 
 // Create custom token // Token is function to display in console log for Middleware
@@ -45,7 +49,7 @@ const persons = [
 
 // routes
 app.get('/', (request, response ) => {
-    response.send('<h1><a href="http://localhost:3001/api/persons">Person list</a><h1>')
+    response.send('<h1><a href="http://localhost:3002/api/persons">Person list</a><h1>')
 })
 
 app.get('/api/persons', (request, response) => {
@@ -134,7 +138,7 @@ app.get('/api/persons/:id',(request, response) => {
 })
 
 
-const PORT = 3001
+const PORT = 3002
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

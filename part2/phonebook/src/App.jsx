@@ -171,9 +171,11 @@ const App = () => {
 
     console.log('Use Effects')
 
-    axios.get('http://localhost:3001/persons').then(response => {
+    personService.getAll().then(response => {
       console.log('promise fulfilled')
      setPersons(response.data)
+
+
     })
   }
 
