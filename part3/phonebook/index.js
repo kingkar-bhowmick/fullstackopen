@@ -6,6 +6,8 @@ const cors = require('cors')
 
 const app = express()
 
+app.use(express.static('build'))
+
 //// Middleware
 app.use(express.json())
 //app.use(morgan('tiny'))
