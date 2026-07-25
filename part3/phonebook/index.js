@@ -2,11 +2,14 @@ const express = require('express')
 const { request } = require('node:http')
 const morgan = require('morgan')
 const cors = require('cors')
+const path = require('path')
 
 
 const app = express()
 
-app.use(express.static('build'))
+
+
+app.use(express.static('dist'))
 
 //// Middleware
 app.use(express.json())
@@ -51,7 +54,7 @@ const persons = [
 
 // routes
 app.get('/', (request, response ) => {
-    response.send('<h1><a href="http://localhost:3002/api/persons">Person list</a><h1>')
+  response.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
 app.get('/api/persons', (request, response) => {

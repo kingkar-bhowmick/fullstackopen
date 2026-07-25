@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3002/api/persons'
+//const baseUrl = 'http://localhost:3002/api/persons'
+
+const baseUrl = 'api/persons'
 
 //'http://localhost:3001/persons'
 
