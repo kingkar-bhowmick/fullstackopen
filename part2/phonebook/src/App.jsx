@@ -134,7 +134,7 @@ const App = () => {
       const personObject = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1 // simple id
+        // id: persons.length + 1 // simple id
       }
 
       // concat creates a NEW array (no mutation!) - React sees the change and re-renders
