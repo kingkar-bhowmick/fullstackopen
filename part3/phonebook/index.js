@@ -3,6 +3,10 @@ const { request } = require('node:http')
 const morgan = require('morgan')
 const cors = require('cors')
 const path = require('path')
+require('dotenv').config()
+
+const Person = require('./models/person')
+
 
 
 const app = express()
@@ -58,23 +62,25 @@ app.get('/', (request, response ) => {
 })
 
 app.get('/api/persons', (request, response) => {
-  response.json(persons)
+  Person.find({}).then(persons => {
+    response.json(persons)
+  })
 })
 
 
 app.get('/api/info', (request, response) => {
 
   const date = new Date()
-  const phonebookCount = persons.length
 
-  response.send(`<p>Phonebook has info for ${phonebookCount} people</p><p>${date}</p>`)
-  
+  Person.countDocuments({}).then(count => {
+    response.send(`<p>Phonebook has info for ${count} people</p><p>${date}</p>`)
+  })  
 })
 
-app.get('/api/persons/:id',(request, response) => {
+app.get('/api/persons/:id', async(request, response) => {
   const id = request.params.id
 
-  const person = persons.find(person => person.id == id)
+  const person = await Person.findById(id)
 
   if(person){
 
@@ -88,25 +94,23 @@ app.get('/api/persons/:id',(request, response) => {
   })
 
 
-  app.delete('/api/persons/:id', (request, response) => { 
+  app.delete('/api/persons/:id', async(request, response) => { 
 
     const id = request.params.id
 
-     const index = persons.findIndex(p => p.id === id)
+    // Mongose delete router / api function
+     const result = await Person.findByIdAndDelete(id)
 
-    if (index === -1) {
+    if (!result) {
         return response.status(404).end()
       }
-
-      persons.splice(index, 1)
-
       
     response.status(204).end()
 
   })
 
 
-  app.post('/api/persons', (request, response) => {
+  app.post('/api/persons', async(request, response) => {
   const body = request.body
 
   if (!body.name || !body.number) {
@@ -115,7 +119,7 @@ app.get('/api/persons/:id',(request, response) => {
     })
   }
 
-  const existingPerson = persons.find(person => person.name == body.name)
+  const existingPerson =  await Person.findOne({ name: body.name })
 
   //if return truthy, execute the the command
   if(existingPerson)
@@ -125,21 +129,26 @@ app.get('/api/persons/:id',(request, response) => {
     })
   }
 
-  const maxID = persons.length > 0
+  /*const maxID = persons.length > 0
     ? Math.max(...persons.map(n => Number(n.id)))
-    : 0
+    : 0*/
 
-  const newPerson = {
+  /*const newPerson = {
     id: String(maxID + 1),
     name: body.name,
     number: body.number
-  }
+  }*/
 
-  persons.push(newPerson)
+    const newPerson = new Person({
+    name: body.name,
+    number: body.number  })
+
+   const savedPerson = await newPerson.save()
+
+  response.json(savedPerson)
 
   console.log(newPerson)
 
-  response.json(newPerson)
 })
 
 

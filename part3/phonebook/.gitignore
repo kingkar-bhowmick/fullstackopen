@@ -1,1 +1,2 @@
 echo "node_modules" > .gitignore
+echo "MONGODB_URI=mongodb://localhost/phonebook" > .env
