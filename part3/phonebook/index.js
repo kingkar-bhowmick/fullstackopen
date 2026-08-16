@@ -1,5 +1,4 @@
 const express = require('express')
-const { request } = require('node:http')
 const morgan = require('morgan')
 const cors = require('cors')
 const path = require('path')
@@ -29,7 +28,7 @@ morgan.token('body', (req) => {
 
 // Use token
 // Middleware
-// method print, post, status, prints status code, response, and response time ms, and body 
+// method print, post, status, prints status code, response, and response time ms, and body
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 
@@ -51,7 +50,7 @@ app.get('/api/info', (request, response, next) => {
 
   Person.countDocuments({}).then(count => {
     response.send(`<p>Phonebook has info for ${count} people</p><p>${date}</p>`)
-  }).catch(error => next(error))  
+  }).catch(error => next(error))
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -59,36 +58,36 @@ app.get('/api/persons/:id', (request, response, next) => {
 
   Person.findById(id).then(person => {
 
-      if(person){
+    if(person){
 
-     response.json(person)
+      response.json(person)
 
-  }
-  else  {
-    response.status(404).end()
-  }
+    }
+    else  {
+      response.status(404).end()
+    }
 
   }).catch(error => next(error))
 
-  })
+})
 
 
-  app.delete('/api/persons/:id', (request, response, next) => { 
+app.delete('/api/persons/:id', (request, response, next) => {
 
-    const id = request.params.id
+  const id = request.params.id
 
-    // Mongose delete router / api function
-     Person.findByIdAndDelete(id).then(person => {
+  // Mongose delete router / api function
+  Person.findByIdAndDelete(id).then(person => {
 
-      if (!person) {
-        return response.status(404).end()
-      }
-      
+    if (!person) {
+      return response.status(404).end()
+    }
+
     response.status(204).end()
 
-     }).catch(error => next(error))
+  }).catch(error => next(error))
 
-  })
+})
 
 
 app.post('/api/persons', async (request, response, next) => {
@@ -114,7 +113,7 @@ app.post('/api/persons', async (request, response, next) => {
 
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const {name, number} = request.body
+  const { name, number } = request.body
 
   Person.findByIdAndUpdate(request.params.id,
     { name, number },
@@ -129,12 +128,12 @@ app.put('/api/persons/:id', (request, response, next) => {
     }
   }).catch(error => next(error))
 
-  })
+})
 
 //Unknown Endpoint
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({error: 'unknown endpoint'})
+  response.status(404).send({ error: 'unknown endpoint' })
 }
 
 app.use(unknownEndpoint)
