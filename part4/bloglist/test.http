@@ -1,0 +1,35 @@
+### GET all blogs
+GET http://localhost:3001/api/blogs
+
+### POST a new blog
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "title": "POST API TEST",
+  "author": "Blog Kingkar",
+  "url": "https://www.kingkarblog.com",
+  "likes": 1000
+}
+
+### POST second blog
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Clean Code Principles",
+  "author": "Robert Martin",
+  "url": "https://cleancoder.com",
+  "likes": 500
+}
+
+### POST third blog
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Full Stack Open Notes",
+  "author": "University of Helsinki",
+  "url": "https://fullstackopen.com",
+  "likes": 750
+}
