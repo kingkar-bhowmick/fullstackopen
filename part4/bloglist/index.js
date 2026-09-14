@@ -1,21 +1,10 @@
-const express = require('express')      // Import Express framework
+  // Import Express framework
 const mongoose = require('mongoose')
-const blogsRouter = require('./controllers/blogs')
 
 //Refactored to its own module Config
 const {PORT, MONGODB_URI} = require('./utils/config')
 
-
-const app = express()                 // Create Express application
-
-
-
-//Middleware: Parse JSON bodies, note bellow
-app.use(express.json())
-
-
-//Given to the controllers
-app.use('/api/blogs', blogsRouter)
+const {app} = require('./app')
 
 
 // Given to the Config
